@@ -1,26 +1,29 @@
-# Custom Tournament Bracket Builder
+# Quiz App
 **WEB-115 Final Project Proposal**
-Student: [Your Name] | Repo: `WEB-115_FinalProject_[LastName]`
+Student: Iniya Rathinakumar | Repo: `WEB-115_FinalProject_Rathinakumar`
 
 ---
 
 ## Overview
 
-This is a web app that lets users build and run single-elimination tournament brackets for anything they want — favorite foods, video games, movies, songs, athletes, whatever. The user names the tournament, adds contestants (up to 16), and the app generates the full bracket automatically. Users click to advance winners round by round until a champion is crowned. Every tournament is saved to `localStorage` so users can close the tab and pick up where they left off.
+This is a web app that allows users to take a multiple-choice quiz. The app will load questions from a JSON file and display them one at a time with several answer options. Users will select an answer, receive feedback on whether it is correct, and then move on to the next question until the quiz is complete.
 
-The target user is anyone who wants a fast, fun way to settle a debate or rank a list. No spreadsheet or third-party bracket site required.
+At the end of the quiz, the user will see their final score and have the option to restart the quiz. The app is designed to be simple, interactive, and easy to use.
+
+The target user is students or anyone who wants a quick way to test their knowledge on a topic without needing external tools or websites.
 
 ---
 
 ## Features
 
-- Create a new named tournament and add up to 16 contestants.
-- App auto-generates a balanced single-elimination bracket from the entry list.
-- Click to select the winner of each match and advance them to the next round.
-- Bracket updates in real time as winners are chosen — completed matches are visually locked and greyed out.
-- A champion screen appears when the final match is decided.
-- All tournament state is saved to `localStorage` — progress survives a page refresh.
-- Users can reset a tournament to start over or delete it entirely.
+- Start quiz button to begin
+- Questions loaded dynamically from a JSON file
+- Multiple-choice answer options for each question
+- Immediate feedback after selecting an answer (correct or incorrect)
+- Score tracking throughout the quiz
+- "Next Question" button to move through the quiz
+- Final results screen displaying the total score
+- Option to restart the quiz
 
 ---
 
@@ -28,30 +31,27 @@ The target user is anyone who wants a fast, fun way to settle a debate or rank a
 
 | Requirement | Implementation |
 |---|---|
-| **If Statements & Loops** | Generating the bracket requires looping over contestants to pair them into first-round matches. If statements determine whether a round is complete (all winners chosen) before unlocking the next round, and check edge cases like odd contestant counts or a bye slot. |
-| **Event Listeners** | Click listeners on each match card select the winner and trigger a re-render. A submit listener on the setup form kicks off bracket generation. A reset button clears state after a confirmation check. |
-| **DOM Element Creation** | The entire bracket (every round column, match card, contestant name label, and winner indicator) is built dynamically with `createElement` and `appendChild`. Nothing is hardcoded in the HTML beyond the app shell. |
-| **Classes & Subclasses** | A base `Tournament` class holds the contestant list, bracket state, and methods like `generateBracket()` and `recordWinner()`. `SingleEliminationTournament` extends `Tournament` and implements the specific bracket-advancement logic. A `Match` class represents each individual pairing with properties for both contestants and the winner. |
+| **If Statements & Loops** | Loops will be used to go through the list of questions loaded from the JSON file. If statements will check whether the selected answer is correct and update the score, as well as control quiz progression. |
+| **Event Listeners** | Event listeners will be used for starting the quiz, selecting an answer, and clicking the next question button to move forward. |
+| **DOM Element Creation** | Questions and answer choices will be dynamically created using createElement and added to the page with appendChild. The quiz content will not be hardcoded in the HTML. |
+| **Classes & Subclasses** | A base Quiz class will store the questions, current index, and score. A subclass MultipleChoiceQuiz will extend Quiz and handle checking answers and managing quiz-specific behavior. |
 
 ---
 
 ## DLC — Additional Topics
 
 ### JSON & Local Storage
-The full tournament object — contestant names, match results, current round — is serialized with `JSON.stringify()` and saved to `localStorage` after every state change. On load, `JSON.parse()` restores the bracket exactly where the user left off. This means no data is lost between sessions without any backend.
-
-### Fetch & Public APIs
-When a user starts a tournament in "Music Mode," the app fetches the top tracks for a given artist from the MusicBrainz API and pre-fills the contestant list automatically, so users can immediately bracket an artist's discography without typing anything in.
-
-### HTML Canvas
-The bracket is rendered visually on an HTML `<canvas>` element. Contestants are drawn as labeled boxes, connecting lines show the bracket structure, and completed matches are styled differently from pending ones. Canvas re-renders after every winner selection to reflect the updated state.
+The application will use localStorage to save the user’s quiz progress and score. Data such as the current question index and score will be converted into JSON format using JSON.stringify() and stored in the browser. When the page is reloaded, the app will retrieve the data using JSON.parse() to restore the user’s progress. This allows the quiz to persist between sessions without needing a backend.
 
 ---
 
 ## Tech Stack
 
 - HTML, CSS, Vanilla JavaScript
-- MusicBrainz API *(free, no API key required)*
-- `localStorage` for tournament persistence
-- HTML Canvas for bracket rendering
+- JSON (for quiz questions)
+- localStorage for saving quiz data
+- VS Code + GitHub
+- HTML, CSS, Vanilla JavaScript
+- JSON (for quiz questions)
+- localStorage for saving quiz data
 - VS Code + GitHub
