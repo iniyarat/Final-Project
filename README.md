@@ -1,6 +1,7 @@
 # Quiz App
 **WEB-115 Final Project Proposal**
 Student: Iniya Rathinakumar | Repo: `WEB-115_FinalProject_Rathinakumar`
+https://iniyarat.github.io/WEB-115_FinalProject_Rathinakumar/ 
 
 ---
 
